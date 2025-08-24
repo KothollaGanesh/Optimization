@@ -1,0 +1,235 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '@angular/material/theming';
+
+// Custom theme colors
+$primary-color: #2c5aa0;
+$accent-color: #1976d2;
+$warn-color: #f44336;
+$success-color: #4caf50;
+
+// Define the palettes
+$app-primary: mat-palette($mat-blue, 800);
+$app-accent: mat-palette($mat-blue, A200, A100, A400);
+$app-warn: mat-palette($mat-red);
+
+// Create the theme object
+$app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
+
+// Include theme styles for core and each component used in your app
+@include angular-material-theme($app-theme);
+
+// Global styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Roboto', sans-serif;
+}
+
+// Utility classes
+.text-primary { color: $primary-color !important; }
+.text-success { color: $success-color !important; }
+.text-warning { color: #ff9800 !important; }
+.text-danger { color: $warn-color !important; }
+
+.bg-primary { background-color: $primary-color !important; }
+.bg-success { background-color: $success-color !important; }
+.bg-warning { background-color: #ff9800 !important; }
+.bg-danger { background-color: $warn-color !important; }
+
+// Custom components
+.card-hover {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.12);
+  }
+}
+
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  
+  &.status-active { background-color: #e8f5e8; color: #2e7d32; }
+  &.status-inactive { background-color: #fff3e0; color: #ef6c00; }
+  &.status-pending { background-color: #fff8e1; color: #f57f17; }
+  &.status-completed { background-color: #e8f5e8; color: #2e7d32; }
+  &.status-cancelled { background-color: #ffebee; color: #c62828; }
+}
+
+// Layout
+.main-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-area {
+  flex: 1;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .content-area {
+    padding: 10px;
+  }
+}
+
+// Loading spinner
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+// Form styles
+.form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  
+  .mat-form-field {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+
+// Table styles
+.data-table {
+  width: 100%;
+  margin-top: 20px;
+  
+  .mat-header-cell {
+    font-weight: 600;
+    color: $primary-color;
+  }
+  
+  .mat-row:hover {
+    background-color: #f5f5f5;
+  }
+}
+
+// Dashboard cards
+.dashboard-card {
+  margin: 10px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
+  }
+  
+  .card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    
+    .icon {
+      margin-right: 10px;
+      font-size: 24px;
+    }
+    
+    h3 {
+      margin: 0;
+      color: $primary-color;
+    }
+  }
+  
+  .card-content {
+    .number {
+      font-size: 2rem;
+      font-weight: bold;
+      color: $primary-color;
+    }
+    
+    .label {
+      color: #666;
+      font-size: 0.9rem;
+    }
+  }
+}
+
+// Sidebar styles
+.sidebar {
+  width: 250px;
+  background-color: $primary-color;
+  color: white;
+  min-height: 100vh;
+  
+  .logo {
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    
+    h2 {
+      margin: 0;
+      font-size: 1.2rem;
+    }
+  }
+  
+  .nav-menu {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    
+    li {
+      margin: 0;
+      
+      a {
+        display: flex;
+        align-items: center;
+        padding: 15px 20px;
+        color: white;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+        
+        &:hover, &.active {
+          background-color: rgba(255,255,255,0.1);
+        }
+        
+        .icon {
+          margin-right: 10px;
+          width: 20px;
+        }
+      }
+    }
+  }
+}
+
+// Mobile responsive sidebar
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    left: -250px;
+    transition: left 0.3s ease;
+    z-index: 1000;
+    
+    &.open {
+      left: 0;
+    }
+  }
+  
+  .sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 999;
+  }
+}
